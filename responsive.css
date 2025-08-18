@@ -1,0 +1,1277 @@
+/* CSS Responsivo para corrigir problemas de layout */
+
+/* Reset de overflow horizontal */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+
+/* Media Queries para Responsividade */
+
+/* Tablets e dispositivos médios - AGORA INCLUINDO NO FORMATO MOBILE */
+@media screen and (max-width: 1024px) {
+    /* Header responsivo */
+    .main-header {
+        padding: 10px 0;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .header-logo img {
+        max-width: 180px;
+    }
+    
+    .header-nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .header-nav a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+    
+    /* Hero Section responsivo */
+    .hero-section {
+        padding: 60px 20px;
+        min-height: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-content {
+        text-align: center;
+        max-width: 100%;
+        z-index: 2;
+        position: relative;
+    }
+    
+    .hero-content h1 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+        margin-bottom: 15px;
+        line-height: 1.2;
+    }
+    
+    .hero-content p {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+        max-width: 250px;
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    /* Ocultar imagens decorativas em mobile */
+    .hero-section img[src*="eimagem.png"],
+    .hero-section img[src*="ava.png"],
+    .hero-section img[src*="slide2.png"] {
+        display: none !important;
+    }
+    
+    /* Ocultar setinhas de navegação dos slides em mobile */
+    .hero-nav-arrow {
+        display: none !important;
+    }
+
+    /* Centralizar slide2-content em mobile */
+    .slide2-content {
+        text-align: center !important;
+        margin: 0 auto !important;
+        padding: 0 20px !important;
+    }
+    
+    .slide2-content h1 {
+        text-align: center !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+    
+    /* Melhorias para slides 3 e 4 em mobile */
+    .hero-section[data-slide="2"] .hero-content,
+    .hero-section[data-slide="3"] .hero-content {
+        text-align: center !important;
+        margin: 0 auto !important;
+        padding: 20px !important;
+        max-width: 90%;
+    }
+    
+    /* Ajustar posicionamento do slide 3 (Pedagogia, Conteúdo, Tecnologia) */
+    .hero-section[data-slide="2"] .hero-content div {
+        text-align: center !important;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+    
+    .hero-section[data-slide="2"] .hero-content strong,
+    .hero-section[data-slide="2"] .hero-content span {
+        margin-left: 0 !important;
+        display: block;
+        margin-bottom: 10px;
+    }
+    
+    /* Ajustar posicionamento do slide 4 (Não basta ensinar, é preciso TRANSFORMAR) */
+    .hero-section[data-slide="3"] .hero-content div {
+        text-align: center !important;
+        position: relative !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+    
+    .hero-section[data-slide="3"] .hero-content p {
+        margin: 0 auto 10px auto !important;
+        text-align: center !important;
+        color: #000000 !important;
+        text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+    }
+    
+    /* Ocultar imagens dos slides 3 e 4 em mobile para melhor legibilidade */
+    
+
+    
+    /* Adicionar slide3.png como fundo do slide 3 em mobile */
+    .hero-section[data-slide="2"] {
+        background-image: linear-gradient(90deg, rgba(128, 128, 128, 0.8) 0%, rgba(0, 200, 255, 0.6) 100%), url('assets/img/slide3.png') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+    }
+    
+    /* Alterar cores das palavras no slide 3 APENAS para mobile */
+    .hero-section[data-slide="2"] .hero-content strong:first-child {
+        color: #000000 !important; /* Pedagogia em preto */
+    }
+    
+    .hero-section[data-slide="2"] .hero-content strong:last-child {
+        color: #1e3a8a !important; /* Tecnologia em azul escuro */
+    }
+    
+    /* Adicionar slide14.jpg como fundo do slide 4 em mobile */
+    .hero-section[data-slide="3"] {
+        background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 200, 0.9) 15%, rgba(173, 216, 230, 0.85) 30%, rgba(221, 160, 221, 0.8) 50%, rgba(255, 182, 193, 0.75) 70%, rgba(138, 43, 226, 0.7) 85%, rgba(0, 0, 139, 0.6) 100%), url('assets/img/slide14.jpg') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+    }
+    
+    /* Ajustar setas e indicadores do carousel */
+    .carousel-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .carousel-indicators {
+        bottom: 20px;
+        gap: 8px;
+    }
+    
+    .carousel-indicator {
+        width: 8px;
+        height: 8px;
+    }
+    
+    /* Solutions Section responsivo - MANTENDO LAYOUT CIRCULAR ORIGINAL */
+    .solutions-section {
+        padding: 60px 20px;
+        overflow: hidden;
+    }
+    
+    .solutions-container {
+        max-width: 100%;
+        overflow: visible;
+        position: relative;
+    }
+    
+    .solutions-content h2 {
+        font-size: clamp(1.8rem, 6vw, 2.2rem);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .solutions-content p {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    
+    /* MANTER LAYOUT CIRCULAR ORIGINAL DAS BOLHAS */
+    .solutions-diagram {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+        overflow: visible;
+        /* Manter layout circular original */
+    }
+    
+    /* Manter posicionamento absoluto das bolhas */
+    .central-logo-bubble {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-30%, -50%);
+        z-index: 10;
+        width: 120px;
+        height: 120px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .central-logo-bubble img {
+        width: 80px;
+        height: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    
+    /* MANTER LAYOUT CIRCULAR ORIGINAL DAS BOLHAS EDUCACIONAIS */
+    .education-bubble {
+        position: absolute;
+        /* Manter posicionamento circular original */
+        width: 200px;
+        height: 200px;
+        background-image: linear-gradient(to bottom right, #29abe2, #0071bc);
+        padding: 15px;
+        font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+        line-height: 1.3;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.25s cubic-bezier(0.4, 0.2, 0.2, 1);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 50%;
+    }
+    
+    /* MANTER POSICIONAMENTO CIRCULAR ORIGINAL */
+    /* POSICIONAR BOLHA 1 UM POUCO PARA BAIXO EM MOBILE */
+    .bubble-1 { 
+        transform: translate(-30%, -50%) rotate(0deg) translateY(-100px) rotate(0deg); 
+    }
+    /* POSICIONAR BOLHA 2 À DIREITA EM MOBILE */
+    .bubble-2 { 
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-100px) rotate(-72deg); 
+    }
+    .bubble-3 { 
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-105px) rotate(-144deg); 
+    }
+    .bubble-4 { 
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-105px) rotate(-216deg); 
+    }
+    /* POSICIONAR BOLHA 5 À ESQUERDA EM MOBILE */
+    .bubble-5 { 
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-100px) rotate(-288deg); 
+    }
+    
+    /* MANTER HOVER EFFECTS ORIGINAIS */
+    /* HOVER EFFECT PARA BOLHA 1 UM POUCO PARA BAIXO */
+    .bubble-1:hover { 
+        transform: translate(-30%, -50%) rotate(0deg) translateY(-100px) rotate(0deg); 
+    }
+    /* HOVER EFFECT PARA BOLHA 2 POSICIONADA À DIREITA */
+    .bubble-2:hover { 
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-100px) rotate(-72deg); 
+    }
+    .bubble-3:hover { 
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-105px) rotate(-144deg); 
+    }
+    .bubble-4:hover { 
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-105px) rotate(-216deg); 
+    }
+    /* HOVER EFFECT PARA BOLHA 5 POSICIONADA À ESQUERDA */
+    .bubble-5:hover { 
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-100px) rotate(-288deg); 
+    }
+    
+    /* MANTER ROTAÇÃO DO TEXTO DENTRO DAS BOLHAS */
+    .bubble-1 > * { 
+        transform: rotate(0deg); 
+    }
+    .bubble-2 > * { 
+        transform: rotate(-72deg); 
+    }
+    .bubble-3 > * { 
+        transform: rotate(-144deg); 
+    }
+    .bubble-4 > * { 
+        transform: rotate(-216deg); 
+    }
+    .bubble-5 > * { 
+        transform: rotate(-288deg); 
+    }
+    
+
+    
+    /* MANTER FUNCIONALIDADE DAS SUB-BOLHAS */
+    .sub-bubble {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background-image: linear-gradient(to bottom right, #29abe2, #0071bc);
+        font-size: clamp(0.8rem, 2vw, 1rem);
+        line-height: 1.3;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: scale(0.8);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        display: none;
+    }
+    
+
+    
+    /* MOSTRAR SUB-BOLHAS NO HOVER/ACTIVE */
+    .bubble-1:hover .sub-bubble, .bubble-1:active .sub-bubble {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .bubble-2:hover .sub-bubble, .bubble-2:active .sub-bubble {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .bubble-3:hover .sub-bubble, .bubble-3:active .sub-bubble {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .bubble-4:hover .sub-bubble, .bubble-4:active .sub-bubble {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+    .bubble-5:hover .sub-bubble, .bubble-5:active .sub-bubble {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    /* MANTER POSICIONAMENTO DAS SUB-BOLHAS */
+    /* POSICIONAR SUB-BOLHAS DA BOLHA 1 UM POUCO PARA BAIXO */
+    .bubble-1 .sub-bubble-1 { 
+        transform: translate(-30%, -50%) rotate(0deg) translateY(-180px) rotate(0deg); 
+    }
+    .bubble-1 .sub-bubble-2 { 
+        transform: translate(-30%, -50%) rotate(-36deg) translateY(-85px) translateX(-45px) rotate(36deg); 
+    }
+    .bubble-1 .sub-bubble-3 { 
+        transform: translate(-30%, -50%) rotate(36deg) translateY(-85px) translateX(45px) rotate(-36deg); 
+    }
+    /* POSICIONAR SUB-BOLHA 2 À DIREITA */
+    .bubble-2 .sub-bubble-1 { 
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-40px) rotate(-100deg); 
+    }
+    .bubble-2 .sub-bubble-2 { 
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-80px) translateX(-60px) rotate(-72deg); 
+    }
+    .bubble-2 .sub-bubble-3 { 
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-80px) translateX(60px) rotate(-72deg); 
+    }
+    /* POSICIONAR SUB-BOLHAS DA BOLHA 3 */
+    .bubble-3 .sub-bubble-1 { 
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-95px) rotate(-144deg); 
+    }
+    .bubble-3 .sub-bubble-2 { 
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-95px) translateX(-50px) rotate(-144deg); 
+    }
+    .bubble-3 .sub-bubble-3 { 
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-95px) translateX(50px) rotate(-144deg); 
+    }
+    /* POSICIONAR SUB-BOLHAS DA BOLHA 4 */
+    .bubble-4 .sub-bubble-1 { 
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-85px) rotate(-216deg); 
+    }
+    .bubble-4 .sub-bubble-2 { 
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-85px) translateX(-60px) rotate(-216deg); 
+    }
+    .bubble-4 .sub-bubble-3 { 
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-85px) translateX(60px) rotate(-216deg); 
+    }
+    /* POSICIONAR SUB-BOLHAS DA BOLHA 5 À ESQUERDA */
+    .bubble-5 .sub-bubble-1 { 
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-80px) rotate(-288deg); 
+    }
+    .bubble-5 .sub-bubble-2 { 
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-80px) translateX(-60px) rotate(-288deg); 
+    }
+    .bubble-5 .sub-bubble-3 { 
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-80px) translateX(60px) rotate(-288deg); 
+    }
+    
+    /* Ocultar imagem decorativa em mobile */
+    .solutions-image-wrapper {
+        display: none !important;
+    }
+    
+    .solutions-section img[src*="eimagem.png"] {
+        display: none !important;
+    }
+    
+    /* About Section responsivo */
+    .about-section {
+        padding: 60px 20px;
+    }
+    
+    .about-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .about-content {
+        text-align: center;
+        max-width: 100%;
+        order: 2;
+    }
+    
+    .about-content h2 {
+        font-size: clamp(1.8rem, 6vw, 2.2rem);
+        margin-bottom: 15px;
+    }
+    
+    .about-content p {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        margin-bottom: 15px;
+    }
+    
+    .about-image {
+        max-width: 100%;
+        height: auto;
+        order: 1;
+    }
+    
+    /* Team Section responsivo */
+    .team-section {
+        padding: 60px 20px;
+    }
+    
+    .team-content h2 {
+        font-size: clamp(1.8rem, 6vw, 2.2rem);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .team-content p {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .team-member {
+        text-align: center;
+    }
+    
+    .team-member img {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 15px;
+    }
+    
+    .team-member h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    
+    .team-member p {
+        font-size: 0.9rem;
+    }
+    
+    /* Contact Section responsivo */
+    .contact-section {
+        padding: 60px 20px;
+    }
+    
+    .contact-content h2 {
+        font-size: clamp(1.8rem, 6vw, 2.2rem);
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .contact-content p {
+        font-size: clamp(1rem, 3vw, 1.1rem);
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    
+    .contact-form {
+        max-width: 100%;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
+    
+    .form-group textarea {
+        min-height: 120px;
+    }
+    
+    .contact-form .btn {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+    
+    /* Footer responsivo */
+    .footer {
+        padding: 30px 20px;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+    }
+    
+    .footer-logo img {
+        max-width: 120px;
+    }
+    
+    .footer-nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .footer-nav a {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+        font-size: 0.8rem;
+    }
+    
+    /* Correções específicas para problemas de layout */
+    /* Forçar quebra de linha em textos longos */
+    .hero-content h1, .slide2-content h1 {
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Garantir que as bolhas não saiam da tela */
+    .solutions-diagram {
+        overflow: visible;
+        position: relative;
+        /* Manter layout circular original */
+    }
+    
+    /* Centralizar conteúdo das bolhas */
+    .education-bubble {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* Manter posicionamento absoluto para layout circular */
+        position: absolute;
+    }
+    
+    /* Ajustar espaçamento entre elementos */
+    .solutions-section {
+        margin: 0;
+        padding: 60px 20px;
+    }
+    
+    /* Garantir que o container principal não tenha overflow */
+    .solutions-container {
+        overflow: visible;
+        position: relative;
+    }
+    
+    /* Manter funcionalidade das sub-bolhas em mobile */
+    .sub-bubble {
+        position: absolute;
+        opacity: 0;
+        transition: all 0.3s ease;
+        /* Posicionar sub-bolhas relativas à bolha pai */
+        z-index: 1;
+    }
+    
+    /* Classe para texto menor em dispositivos móveis */
+    .sub-bubble.mobile-small-text {
+        font-size: clamp(0.5rem, 1.2vw, 0.7rem);
+        line-height: 1.1;
+    }
+    
+    /* Esconder sub-bolhas em mobile - elas aparecem no modal */
+    .education-bubble:hover .sub-bubble,
+    .education-bubble:active .sub-bubble {
+        display: none !important;
+        opacity: 0 !important;
+    }
+    
+    /* Adicionar cursor pointer para indicar que é clicável */
+    .education-bubble {
+        cursor: pointer;
+    }
+    
+    /* Modal das bolhas para mobile */
+    .bubble-modal-content {
+        width: 95%;
+        max-width: 500px;
+        margin: 10% auto;
+    }
+    
+    .bubble-modal-header {
+        padding: 20px 20px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .bubble-modal-header h3 {
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
+        flex: 1;
+        text-align: center;
+    }
+    
+    .bubble-modal-body {
+        padding: 20px 15px;
+    }
+    
+    .sub-bubble-grid {
+        gap: 15px;
+    }
+    
+    .sub-bubble-item {
+        padding: 20px 15px;
+    }
+    
+    .sub-bubble-content {
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        line-height: 1.4;
+    }
+    
+    /* Centralização do texto da seção de materiais apenas para dispositivos móveis */
+    .materials-section .materials-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .materials-section .materials-content h2 {
+        text-align: center;
+    }
+    
+    .materials-section .materials-content p {
+        text-align: center;
+        padding-left: 0;
+    }
+    
+    .materials-section .materials-content p::before {
+        display: none;
+    }
+    
+    /* Centralização da imagem em dispositivos móveis */
+    .materials-section .materials-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .materials-section .materials-image-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .materials-section .materials-image-container img {
+        transform: rotate(0deg);
+        margin: 0 auto;
+    }
+    
+    /* Centralização da seção de projetos interdisciplinares para dispositivos móveis */
+    .interdisciplinary-section .interdisciplinary-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .interdisciplinary-section .interdisciplinary-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .interdisciplinary-section .interdisciplinary-content h2 {
+        text-align: center;
+    }
+    
+    .interdisciplinary-section .interdisciplinary-content p {
+        text-align: center;
+    }
+    
+    /* Ocultar imagem decorativa eimagem.png em dispositivos móveis */
+    .interdisciplinary-section img[src*="eimagem.png"] {
+        display: none;
+    }
+    
+    /* Centralização da seção de itinerários formativos para dispositivos móveis */
+    .formative-journeys-section .formative-journeys-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .formative-journeys-section .formative-journeys-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .formative-journeys-section .formative-journeys-content h2 {
+        text-align: center;
+    }
+    
+    .formative-journeys-section .formative-journeys-content p {
+        text-align: center;
+    }
+    
+    /* Centralização da seção de ecossistema pedagógico para dispositivos móveis */
+    .ecosystem-section .ecosystem-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .ecosystem-section .ecosystem-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .ecosystem-section .ecosystem-content h2 {
+        text-align: center;
+    }
+    
+    .ecosystem-section .ecosystem-content p {
+        text-align: center;
+    }
+    
+    /* Ocultar imagem decorativa eimagem.png em dispositivos móveis */
+    .ecosystem-section img[src*="eimagem.png"] {
+        display: none;
+    }
+    
+    /* Centralização da seção de educação profissional para dispositivos móveis */
+    .professional-education-section .professional-education-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .professional-education-section .professional-education-content {
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    .professional-education-section .professional-education-content h2 {
+        text-align: center;
+    }
+    
+    .professional-education-section .professional-education-content p,
+    .professional-education-section .professional-education-content .subtitle,
+    .professional-education-section .professional-education-content strong,
+    .professional-education-section .professional-education-content ul {
+        text-align: center;
+    }
+    
+    .professional-education-section .professional-education-content ul {
+        list-style-position: inside;
+        padding-left: 0;
+    }
+    
+    /* Ocultar imagem decorativa eimagem.png em dispositivos móveis */
+    .professional-education-section img[src*="eimagem.png"] {
+        display: none;
+    }
+    
+    /* Melhorar exibição da imagem m1.png em dispositivos móveis */
+    .professional-education-section .professional-education-image-container {
+        width: 100%;
+        max-width: 300px;
+        margin: 20px auto 0;
+        justify-content: center;
+    }
+    
+    .professional-education-section .professional-education-image-container .image-wrapper {
+        width: 100%;
+        height: 300px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+    
+    .professional-education-section .professional-education-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    /* Centralização e melhorias do carrossel de livros para dispositivos móveis */
+    .books-carousel-section {
+        padding: clamp(40px, 8vw, 60px) 20px;
+    }
+    
+    .books-carousel-container {
+        flex-direction: row;
+        gap: 10px;
+        margin: 20px 0;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .book-item {
+        margin: 0;
+        width: auto;
+        max-width: 100px;
+        flex: 0 0 auto;
+    }
+    
+    .book-item img {
+        width: 100%;
+        height: auto;
+        max-height: 140px;
+        object-fit: cover;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    
+    .books-carousel-arrow {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .books-carousel-arrow:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+    
+    /* Garantir que o modal seja responsivo em telas muito pequenas */
+    @media screen and (max-width: 480px) {
+        .bubble-modal-content {
+            width: 98%;
+            margin: 5% auto;
+        }
+        
+        .bubble-modal-header {
+            padding: 15px 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .bubble-modal-body {
+            padding: 15px 10px;
+        }
+        
+        .sub-bubble-item {
+            padding: 15px 10px;
+        }
+        
+        .sub-bubble-content {
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+        }
+    }
+}
+
+/* Dispositivos muito pequenos */
+@media screen and (max-width: 480px) {
+    /* Header responsivo */
+    .header-logo img {
+        max-width: 150px;
+    }
+    
+    .header-nav ul {
+        gap: 10px;
+    }
+    
+    .header-nav a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+    
+    /* Hero Section responsivo */
+    .hero-section {
+        padding: 50px 15px;
+    }
+    
+    .hero-content h1 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 12px;
+    }
+    
+    .hero-content p {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+        margin-bottom: 20px;
+    }
+    
+    .hero-buttons .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Solutions Section responsivo */
+    .solutions-section {
+        padding: 50px 15px;
+    }
+    
+    .solutions-content h2 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 12px;
+    }
+    
+    .solutions-content p {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+        margin-bottom: 20px;
+    }
+    
+    /* Ajustar tamanho das bolhas para telas muito pequenas */
+    .education-bubble {
+        width: 120px;
+        height: 120px;
+        padding: 10px;
+    }
+    
+    /* Ajustar tamanho da bolha central para telas menores */
+    .central-logo-bubble {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .central-logo-bubble img {
+        width: 70px;
+        height: auto;
+    }
+    
+    /* Ajustar posicionamento das bolhas para telas muito pequenas */
+    /* POSICIONAR BOLHA 1 UM POUCO PARA BAIXO EM TELAS PEQUENAS */
+    .bubble-1 { 
+        transform: translate(-30%, -50%) rotate(0deg) translateY(-90px) rotate(0deg); 
+    }
+    /* POSICIONAR BOLHA 2 À DIREITA EM TELAS PEQUENAS */
+    .bubble-2 { 
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-90px) rotate(-72deg); 
+    }
+    /* POSICIONAR BOLHA 3 EM TELAS PEQUENAS */
+    .bubble-3 { 
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-95px) rotate(-144deg); 
+    }
+    /* POSICIONAR BOLHA 5 À ESQUERDA EM TELAS PEQUENAS */
+    .bubble-4 { 
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-95px) rotate(-216deg); 
+    }
+    /* POSICIONAR BOLHA 5 À ESQUERDA EM TELAS PEQUENAS */
+    .bubble-5 { 
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-90px) rotate(-288deg); 
+    }
+    
+    /* Ajustar tamanho das sub-bolhas */
+    .sub-bubble {
+        width: 100px;
+        height: 100px;
+        font-size: clamp(0.6rem, 1.8vw, 0.8rem);
+    }
+    
+    .education-bubble h3 {
+        font-size: 0.8rem;
+    }
+    
+    .education-bubble p {
+        font-size: 0.6rem;
+    }
+    
+
+    
+
+    
+    /* About Section responsivo */
+    .about-section {
+        padding: 50px 15px;
+    }
+    
+    .about-content h2 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 12px;
+    }
+    
+    .about-content p {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+        margin-bottom: 12px;
+    }
+    
+    /* Team Section responsivo */
+    .team-section {
+        padding: 50px 15px;
+    }
+    
+    .team-content h2 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 12px;
+    }
+    
+    .team-content p {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+        margin-bottom: 20px;
+    }
+    
+    .team-grid {
+        gap: 20px;
+        max-width: 250px;
+    }
+    
+    .team-member img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 12px;
+    }
+    
+    .team-member h3 {
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+    }
+    
+    .team-member p {
+        font-size: 0.8rem;
+    }
+    
+    /* Contact Section responsivo */
+    .contact-section {
+        padding: 50px 15px;
+    }
+    
+    .contact-content h2 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+        margin-bottom: 12px;
+    }
+    
+    .contact-content p {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+        margin-bottom: 20px;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .form-group textarea {
+        min-height: 100px;
+    }
+    
+    .contact-form .btn {
+        padding: 12px;
+        font-size: 1rem;
+    }
+    
+    /* Footer responsivo */
+    .footer {
+        padding: 25px 15px;
+    }
+    
+    .footer-container {
+        gap: 20px;
+    }
+    
+    .footer-logo img {
+        max-width: 100px;
+    }
+    
+    .footer-nav ul {
+        gap: 12px;
+    }
+    
+    .footer-nav a {
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+    .footer-bottom {
+        font-size: 0.7rem;
+    }
+}
+
+/* Orientação paisagem em dispositivos móveis */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        padding: 40px 20px;
+        min-height: auto;
+    }
+    
+    .hero-content h1 {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: 10px;
+    }
+    
+    .hero-content p {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+        margin-bottom: 15px;
+    }
+    
+    .hero-buttons {
+        gap: 10px;
+    }
+    
+    .hero-buttons .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .solutions-section {
+        padding: 40px 20px;
+    }
+    
+    .about-section {
+        padding: 40px 20px;
+    }
+    
+    .team-section {
+        padding: 40px 20px;
+    }
+    
+    .contact-section {
+        padding: 40px 20px;
+    }
+}
+
+/* Correções para dispositivos com tela muito pequena */
+@media screen and (max-width: 360px) {
+    .hero-content h1 {
+        font-size: 1.4rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.8rem;
+    }
+    
+    .solutions-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .solutions-content p {
+        font-size: 0.8rem;
+    }
+    
+    .about-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .about-content p {
+        font-size: 0.8rem;
+    }
+    
+    .team-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .team-content p {
+        font-size: 0.8rem;
+    }
+    
+    .contact-content h2 {
+        font-size: 1.4rem;
+    }
+    
+    .contact-content p {
+        font-size: 0.8rem;
+    }
+    
+    .education-bubble {
+        width: 90px;
+        height: 90px;
+    }
+    
+
+    
+    /* POSICIONAR BOLHA 1 UM POUCO PARA BAIXO EM TELAS MUITO PEQUENAS */
+    .bubble-1 {
+        transform: translate(-30%, -50%) rotate(0deg) translateY(-90px) rotate(0deg);
+    }
+    
+
+    
+    /* POSICIONAR BOLHA 2 À DIREITA EM TELAS MUITO PEQUENAS */
+    .bubble-2 {
+        transform: translate(-20%, -50%) rotate(72deg) translateY(-90px) rotate(-72deg);
+    }
+    
+
+    
+    /* POSICIONAR BOLHA 3 EM TELAS MUITO PEQUENAS */
+    .bubble-3 {
+        transform: translate(-25%, -50%) rotate(144deg) translateY(-95px) rotate(-144deg);
+    }
+    
+    /* POSICIONAR BOLHA 4 EM TELAS MUITO PEQUENAS */
+    .bubble-4 {
+        transform: translate(-25%, -50%) rotate(216deg) translateY(-95px) rotate(-216deg);
+    }
+    
+    /* POSICIONAR BOLHA 5 À ESQUERDA EM TELAS MUITO PEQUENAS */
+    .bubble-5 {
+        transform: translate(-40%, -50%) rotate(288deg) translateY(-90px) rotate(-288deg);
+    }
+    
+    /* Ajustar tamanho da bolha central para telas muito pequenas */
+    .central-logo-bubble {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .central-logo-bubble img {
+        width: 60px;
+        height: auto;
+    }
+    
+    .education-bubble h3 {
+        font-size: 0.8rem;
+    }
+    
+    .education-bubble p {
+        font-size: 0.6rem;
+    }
+    
+
+
+}
