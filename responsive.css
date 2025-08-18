@@ -47,7 +47,8 @@ html, body {
         padding: 60px 20px;
         min-height: auto;
         position: relative;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
     
     .hero-content {
