@@ -11,7 +11,50 @@ html, body {
     max-width: 100%;
 }
 
+/* Melhorias para gestos de toque em dispositivos móveis */
+.hero-section {
+    touch-action: pan-y pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: transform 0.3s ease;
+}
 
+/* Garantir que os slides sejam responsivos ao toque */
+.hero-section[data-slide] {
+    touch-action: pan-y pinch-zoom;
+}
+
+/* Feedback visual durante swipe */
+.hero-section.swiping {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Melhorar indicadores de slide para toque */
+.hero-indicators {
+    touch-action: manipulation;
+}
+
+.hero-indicator {
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+/* Adicionar animação suave para transições de slide */
+.hero-section {
+    transition: background-image 0.5s ease, transform 0.3s ease;
+}
+
+/* Melhorar feedback visual para toque nos indicadores */
+.hero-indicator:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease;
+}
 
 /* Media Queries para Responsividade */
 
@@ -47,8 +90,7 @@ html, body {
         padding: 60px 20px;
         min-height: auto;
         position: relative;
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: hidden;
     }
     
     .hero-content {
@@ -91,10 +133,48 @@ html, body {
     }
     
     /* Ocultar setinhas de navegação dos slides em mobile */
-    .hero-nav-arrow {
+    /* Em dispositivos móveis, a navegação é feita apenas por swipe (passar o dedo para os lados) */
+    .hero-section .hero-nav-arrow {
         display: none !important;
     }
-
+    
+    /* Melhorar indicadores para mobile */
+    .hero-section .hero-indicators {
+        bottom: 30px;
+        gap: 12px;
+        z-index: 10;
+    }
+    
+    /* Ajustar posição das bolinhas para baixo nos slides 1, 2 e 4 em mobile */
+    .hero-section[data-slide="0"] .hero-indicators,
+    .hero-section[data-slide="1"] .hero-indicators,
+    .hero-section[data-slide="3"] .hero-indicators {
+        bottom: -200px;
+    }
+    
+    .hero-section .hero-indicator {
+        width: 12px;
+        height: 12px;
+        background: rgba(255, 255, 255, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        touch-action: manipulation;
+    }
+    
+    .hero-section .hero-indicator.active {
+        background: rgba(255, 255, 255, 1);
+        border-color: rgba(255, 255, 255, 1);
+        transform: scale(1.2);
+    }
+    
+    .hero-section .hero-indicator:hover,
+    .hero-section .hero-indicator:active {
+        background: rgba(255, 255, 255, 0.8);
+        transform: scale(1.1);
+    }
+    
     /* Centralizar slide2-content em mobile */
     .slide2-content {
         text-align: center !important;
