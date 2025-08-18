@@ -62,7 +62,7 @@ html, body {
 @media screen and (max-width: 1024px) {
     /* Header responsivo */
     .main-header {
-        padding: 10px 0;
+        padding: 0;
     }
     
     .header-container {
