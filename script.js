@@ -32,6 +32,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let heroInterval = null;
     let isTransitioning = false;
 
+    // Função para verificar se é dispositivo móvel
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+               window.innerWidth <= 768;
+    }
+
+    // Função para verificar se é dispositivo com tela sensível ao toque
+    function isTouchDevice() {
+        return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    }
+
     const heroSection = document.querySelector('.hero-section');
     const heroTitle = document.getElementById('heroTitle');
     const heroPrev = document.getElementById('heroPrev');
@@ -40,9 +51,62 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adicionar event listeners para swipe em mobile
     if (heroSection) {
+        // Event listeners para swipe
         heroSection.addEventListener('touchstart', handleTouchStart, { passive: false });
         heroSection.addEventListener('touchmove', handleTouchMove, { passive: false });
         heroSection.addEventListener('touchend', handleTouchEnd, { passive: false });
+        
+        // Adicionar suporte para tap para pausar/retomar autoplay
+        let tapCount = 0;
+        let tapTimer = null;
+        
+        heroSection.addEventListener('touchstart', (e) => {
+            tapCount++;
+            
+            if (tapCount === 1) {
+                tapTimer = setTimeout(() => {
+                    tapCount = 0;
+                }, 300);
+            } else if (tapCount === 2) {
+                clearTimeout(tapTimer);
+                tapCount = 0;
+                
+                // Duplo tap pausa/retoma autoplay
+                if (heroAutoPlay) {
+                    pauseAutoPlay();
+                    heroAutoPlay = false;
+                } else {
+                    heroAutoPlay = true;
+                    startAutoPlay();
+                }
+            }
+        }, { passive: true });
+        
+        // Adicionar suporte para gestos de pinch (zoom) se necessário
+        let initialDistance = 0;
+        
+        heroSection.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                initialDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+            }
+        }, { passive: true });
+        
+        heroSection.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                const currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                
+                // Se for um gesto de pinch, não processar como swipe
+                if (Math.abs(currentDistance - initialDistance) > 20) {
+                    isSwiping = false;
+                }
+            }
+        }, { passive: true });
     }
 
     // Criar indicadores
@@ -199,28 +263,68 @@ document.addEventListener('DOMContentLoaded', function() {
         resetAutoPlay();
     }
 
-    // Funcionalidade de swipe para mobile
+    // Funcionalidade de swipe para mobile - VERSÃO OTIMIZADA
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let touchEndY = 0;
     let isSwiping = false;
+    let swipeThreshold = 50; // Distância mínima para considerar como swipe
+    let verticalThreshold = 100; // Distância máxima vertical para considerar como swipe horizontal
+    let lastSwipeTime = 0;
+    let swipeCooldown = 500; // Tempo mínimo entre swipes (ms)
 
     function handleTouchStart(e) {
+        // Verificar se é um dispositivo móvel
+        if (!isMobileDevice() && !isTouchDevice()) return;
+        
         touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
         isSwiping = true;
+        
+        // Pausar autoplay durante o swipe
+        pauseAutoPlay();
+        
+        // Adicionar classe visual para feedback
+        heroSection.classList.add('swiping');
     }
 
     function handleTouchMove(e) {
         if (!isSwiping) return;
-        e.preventDefault();
+        
+        // Permitir scroll vertical normal, mas prevenir scroll horizontal durante swipe
+        const currentX = e.changedTouches[0].screenX;
+        const currentY = e.changedTouches[0].screenY;
+        const deltaX = Math.abs(currentX - touchStartX);
+        const deltaY = Math.abs(currentY - touchStartY);
+        
+        // Se o movimento for mais horizontal que vertical, prevenir scroll
+        if (deltaX > deltaY && deltaX > 10) {
+            e.preventDefault();
+        }
     }
 
     function handleTouchEnd(e) {
         if (!isSwiping) return;
         
         touchEndX = e.changedTouches[0].screenX;
-        const swipeThreshold = 50; // Distância mínima para considerar como swipe
+        touchEndY = e.changedTouches[0].screenY;
         
-        if (Math.abs(touchEndX - touchStartX) > swipeThreshold) {
+        const deltaX = Math.abs(touchEndX - touchStartX);
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        const currentTime = Date.now();
+        
+        // Verificar cooldown para evitar swipes muito rápidos
+        if (currentTime - lastSwipeTime < swipeCooldown) {
+            isSwiping = false;
+            heroSection.classList.remove('swiping');
+            return;
+        }
+        
+        // Verificar se é um swipe horizontal válido
+        if (deltaX > swipeThreshold && deltaX > deltaY && deltaY < verticalThreshold) {
+            lastSwipeTime = currentTime;
+            
             if (touchEndX > touchStartX) {
                 // Swipe para direita - slide anterior
                 goToSlide(currentHeroSlide - 1);
@@ -231,6 +335,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         isSwiping = false;
+        heroSection.classList.remove('swiping');
+        
+        // Retomar autoplay após um breve delay
+        setTimeout(() => {
+            if (heroAutoPlay) {
+                startAutoPlay();
+            }
+        }, 1000);
     }
 
     // Próximo slide
@@ -282,23 +394,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Event listeners para as setinhas
-    if (heroPrev && heroNext) {
-        heroPrev.addEventListener('click', () => {
-            if (!isTransitioning) {
-                prevSlide();
-                resetAutoPlay();
-            }
-        });
-
-        heroNext.addEventListener('click', () => {
-            if (!isTransitioning) {
-                nextSlide();
-                resetAutoPlay();
-            }
-        });
-    }
-
     // Pausar autoplay no hover
     if (heroSection) {
         heroSection.addEventListener('mouseenter', pauseAutoPlay);
@@ -331,10 +426,42 @@ document.addEventListener('DOMContentLoaded', function() {
             currentButton.classList.add('fade-in');
         }
         
+        // Adicionar atributos para melhor suporte mobile
+        if (isMobileDevice()) {
+            heroSection.setAttribute('data-mobile', 'true');
+        }
+        
+        if (isTouchDevice()) {
+            heroSection.setAttribute('data-touch', 'true');
+        }
+        
         // Aguardar um pouco antes de iniciar o autoplay para garantir que tudo está carregado
         setTimeout(() => {
             startAutoPlay();
         }, 1000);
+    }
+
+    // Event listeners para as setinhas (apenas em desktop)
+    if (heroPrev && heroNext) {
+        console.log('Setas encontradas, adicionando event listeners...');
+        
+        heroPrev.addEventListener('click', () => {
+            console.log('Seta anterior clicada');
+            if (!isTransitioning) {
+                prevSlide();
+                resetAutoPlay();
+            }
+        });
+
+        heroNext.addEventListener('click', () => {
+            console.log('Seta próxima clicada');
+            if (!isTransitioning) {
+                nextSlide();
+                resetAutoPlay();
+            }
+        });
+    } else {
+        console.log('Setas não encontradas:', { heroPrev, heroNext });
     }
 
     const navLinks = document.querySelectorAll('.main-nav a');
