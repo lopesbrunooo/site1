@@ -117,7 +117,7 @@ ul {
 }
 
 /* Setinhas de navegação do hero */
-.hero-nav-arrow {
+.hero-section .hero-nav-arrow {
     position: absolute;
     bottom: 50px;
     transform: none;
@@ -127,7 +127,7 @@ ul {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    display: flex;
+    display: flex !important; /* Forçar exibição por padrão */
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -136,44 +136,51 @@ ul {
     backdrop-filter: blur(10px);
 }
 
-.hero-nav-arrow:hover {
+/* Ocultar setas em dispositivos móveis */
+@media screen and (max-width: 1024px) {
+    .hero-section .hero-nav-arrow {
+        display: none !important;
+    }
+}
+
+.hero-section .hero-nav-arrow:hover {
     background: rgba(255, 255, 255, 0.4);
     border-color: rgba(255, 255, 255, 0.6);
     transform: scale(1.15);
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
 }
 
-.hero-nav-arrow:active {
+.hero-section .hero-nav-arrow:active {
     transform: scale(0.95);
 }
 
-.hero-nav-arrow i {
+.hero-section .hero-nav-arrow i {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-.hero-prev {
+.hero-section .hero-nav-arrow.hero-prev {
     left: 10px;
     z-index: 100;
 }
 
-.hero-next {
+.hero-section .hero-nav-arrow.hero-next {
     right: 10px;
     z-index: 100;
 }
 
 /* Indicadores de slide */
-.hero-indicators {
+.hero-section .hero-indicators {
     position: absolute;
     bottom: -170px;
     left: 50%;
     transform: translateX(-50%);
-    display: flex;
+    display: flex !important; /* Forçar exibição por padrão */
     gap: 10px;
     z-index: 100;
 }
 
-.hero-indicator {
+.hero-section .hero-indicator {
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -183,13 +190,13 @@ ul {
     transform: scale(1);
 }
 
-.hero-indicator.active {
+.hero-section .hero-indicator.active {
     background: #fff;
     transform: scale(1.3);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-.hero-indicator:hover {
+.hero-section .hero-indicator:hover {
     background: rgba(255, 255, 255, 0.7);
     transform: scale(1.1);
 }
