@@ -70,6 +70,26 @@ html, body {
         gap: 10px;
     }
     
+    /* Colocar "Parcerias" um pouco para a esquerda em mobile */
+    .main-nav ul li:last-child {
+        margin-right: 20px;
+    }
+    
+    /* Colocar "Soluções educacionais" um pouco para a direita em mobile */
+    .main-nav ul li:nth-child(3) {
+        margin-left: 20px;
+    }
+    
+    /* Colocar "Quem somos" um pouco para a direita em mobile */
+    .main-nav ul li:nth-child(2) {
+        margin-left: 20px;
+    }
+    
+    /* Colocar "Início" um pouco para a direita em mobile */
+    .main-nav ul li:first-child {
+        margin-left: 20px;
+    }
+    
     .header-logo img {
         max-width: 180px;
     }
