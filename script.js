@@ -939,6 +939,108 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Funcionalidade dos education bubbles (apenas desktop)
+    function isDesktop() {
+        return window.innerWidth > 1024;
+    }
 
+    const bubble1 = document.querySelector('.bubble-1');
+    const bubble2 = document.querySelector('.bubble-2');
+    const bubble3 = document.querySelector('.bubble-3');
+    const bubble4 = document.querySelector('.bubble-4');
+    const bubble5 = document.querySelector('.bubble-5');
+
+    if (bubble1 && bubble2 && bubble3 && bubble4 && bubble5) {
+        // Função para esconder todos os bubbles exceto o especificado
+        function hideOtherBubbles(activeBubble) {
+            const allBubbles = [bubble1, bubble2, bubble3, bubble4, bubble5];
+            const allSubBubbles = [];
+            
+            allBubbles.forEach(bubble => {
+                if (bubble !== activeBubble) {
+                    bubble.style.color = 'transparent';
+                    const subBubbles = bubble.querySelectorAll('.sub-bubble');
+                    subBubbles.forEach(sub => {
+                        sub.style.color = 'transparent';
+                        allSubBubbles.push(sub);
+                    });
+                }
+            });
+        }
+
+        // Função para restaurar todos os bubbles
+        function restoreAllBubbles() {
+            const allBubbles = [bubble1, bubble2, bubble3, bubble4, bubble5];
+            
+            allBubbles.forEach(bubble => {
+                bubble.style.color = '';
+                const subBubbles = bubble.querySelectorAll('.sub-bubble');
+                subBubbles.forEach(sub => {
+                    sub.style.color = '';
+                });
+            });
+        }
+
+        // Event listeners para todos os bubbles
+        bubble1.addEventListener('mouseenter', function() {
+            if (isDesktop()) {
+                hideOtherBubbles(bubble1);
+            }
+        });
+
+        bubble1.addEventListener('mouseleave', function() {
+            if (isDesktop()) {
+                restoreAllBubbles();
+            }
+        });
+
+        bubble2.addEventListener('mouseenter', function() {
+            if (isDesktop()) {
+                hideOtherBubbles(bubble2);
+            }
+        });
+
+        bubble2.addEventListener('mouseleave', function() {
+            if (isDesktop()) {
+                restoreAllBubbles();
+            }
+        });
+
+        bubble3.addEventListener('mouseenter', function() {
+            if (isDesktop()) {
+                hideOtherBubbles(bubble3);
+            }
+        });
+
+        bubble3.addEventListener('mouseleave', function() {
+            if (isDesktop()) {
+                restoreAllBubbles();
+            }
+        });
+
+        bubble4.addEventListener('mouseenter', function() {
+            if (isDesktop()) {
+                hideOtherBubbles(bubble4);
+            }
+        });
+
+        bubble4.addEventListener('mouseleave', function() {
+            if (isDesktop()) {
+                restoreAllBubbles();
+            }
+        });
+
+        bubble5.addEventListener('mouseenter', function() {
+            if (isDesktop()) {
+                hideOtherBubbles(bubble5);
+            }
+        });
+
+        bubble5.addEventListener('mouseleave', function() {
+            if (isDesktop()) {
+                restoreAllBubbles();
+            }
+        });
+    }
 
 });
