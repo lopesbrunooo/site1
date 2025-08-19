@@ -638,6 +638,8 @@ ul {
 .bubble-5 > * { transform: rotate(-288deg); }
 .bubble-1 > * { transform: rotate(0deg); }
 
+
+
 /* Estilos para as sub-bolhas */
 .sub-bubble {
     display: none;
@@ -679,6 +681,8 @@ ul {
     opacity: 1;
     transform: scale(1);
 }
+
+
 
 .bubble-1 .sub-bubble-1 { transform: translate(-50%, -50%) rotate(0deg) translateY(-150px) rotate(0deg); }
 .bubble-1 .sub-bubble-2 { transform: translate(-50%, -50%) rotate(-36deg) translateY(-150px) translateX(-100px) rotate(36deg); }
